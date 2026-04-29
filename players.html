@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Players - Dinamo U18</title>
+
+    <style>
+        body {
+            background: #0b1d3a;
+            color: white;
+            font-family: Arial;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .player {
+            background: #122a52;
+            margin: 15px auto;
+            width: 80%;
+            border-radius: 12px;
+            padding: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .player:hover {
+            background: #163a6b;
+        }
+
+        .player-header {
+            display: flex;
+            align-items: center;
+        }
+
+        .player-header img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+
+        .player-info {
+            display: none;
+            margin-top: 15px;
+            padding-left: 85px;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .player-info p {
+            margin: 5px 0;
+        }
+
+        .player-info a {
+            color: #ff4d4d;
+            text-decoration: none;
+        }
+
+        .player-info img {
+            width: 100%;
+            max-height: 220px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        #backBtn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#backBtn:hover {
+    background: darkred;
+}
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+        .gallery {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    overflow-x: auto;
+}
+
+.gallery img {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+#popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+}
+
+#popup img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+}
+    </style>
+</head>
+
+<body>
+
+<h1>Our Players</h1>
+<button id="backBtn" onclick="showAllPlayers()" style="display:none; margin:20px;">
+    ← Back to Players
+</button>
+
+<!-- PLAYER 1 -->
+<div class="player" onclick="toggleInfo(this)">
+    <div class="player-header">
+        <img src="player8.jpg">
+        <h3>Brax Stewart</h3>
+    </div>
+
+    <div class="player-info">
+        <p><strong>position:</strong>CM</p>
+        <p><strong>Age:</strong> 16</p>
+        <p><strong>Preferred Foot:</strong> Right</p>
+        <p><strong>Country:</strong>Swiss/England</p>
+        <p><strong>Height:</strong> 183cm</p>
+        <p><strong>Number:</strong> 8</p>
+
+        <p><strong>Stats:</strong> 0 Goals | 0 Assists</p>
+
+        <p><strong>Social:</strong></p>
+    <div class="socials">
+        <a href="https://instagram.com/@sbrax8" target="_blank">📸</a>
+    </div>
+
+    <div class="gallery">
+        <img src="brax1.jpg" onclick="openImage(this.src)">
+        <img src="brax2.jpg" onclick="openImage(this.src)">
+        <img src="brax3.jpg" onclick="openImage(this.src)">
+    </div>
+    </div>
+</div>
+
+<!-- PLAYER 2 -->
+<div class="player" onclick="toggleInfo(this)">
+    <div class="player-header">
+        <img src="player96.jpg">
+        <h3>Aiden Mills</h3>
+    </div>
+
+    <div class="player-info">
+        <p><strong>Position:</strong>GK</p>
+        <p><strong>Age:</strong> 18</p>
+        <p><strong>Preferred Foot:</strong> Left</p>
+        <p><strong>Country:</strong> Canada</p>
+        <p><strong>Height:</strong> 180 cm</p>
+        <p><strong>Number:</strong> 96</p>
+
+        <p><strong>Stats:</strong> 1 Goal | 0 Assists</p>
+
+        <p><strong>Social:</strong>
+            <a href="#" target="_blank">Instagram</a>
+        </p>
+
+        <img src="game2.jpg">
+    </div>
+</div>
+<!-- PLAYER 3 -->
+<div class="player" onclick="toggleInfo(this)">
+    <div class="player-header">
+        <img src="player75.jpg">
+        <h3>Gianluca Gentile</h3>
+    </div>
+
+    <div class="player-info">
+        <p><strong>position:</strong>ST</p>
+        <p><strong>Age:</strong> 18</p>
+        <p><strong>Preferred Foot:</strong> Right</p>
+        <p><strong>Country:</strong>Canada/Italy/Malta</p>
+        <p><strong>Height:</strong> 180 cm</p>
+        <p><strong>Number:</strong> 75</p>
+
+        <p><strong>Stats:</strong> 0 Goals | 0 Assists</p>
+
+        <p><strong>Social:</strong></p>
+    <div class="socials">
+         <a href="https://instagram.com/g.gentile_75" target="_blank">📸</a>
+    </div>
+
+        <img src="gianluca1.jpg">
+    </div>
+</div>
+
+
+<!-- PLAYER 4 -->
+<div class="player" onclick="toggleInfo(this)">
+    <div class="player-header">
+        <img src="player25.jpg">
+        <h3>Anthony Fletcher</h3>
+    </div>
+
+    <div class="player-info">
+        <p><strong>position:</strong>CB/CDM</p>
+        <p><strong>Age:</strong> 18</p>
+        <p><strong>Preferred Foot:</strong> left</p>
+        <p><strong>Country:</strong>Canada/Jamaica</p>
+        <p><strong>Height:</strong> 176 cm</p>
+        <p><strong>Number:</strong> 25</p>
+        <p><strong>Stats:</strong> 0 Goals | 0 Assists</p>
+
+        <p><strong>Social:</strong></p>
+    <div class="socials">
+         <a href="https://instagram.com/afletcher051" target="_blank">📸</a>
+    </div>
+
+        <img src="anthony1.jpg">
+    </div>
+</div>
+
+<script>
+function toggleInfo(selectedPlayer) {
+    let allPlayers = document.querySelectorAll(".player");
+
+    allPlayers.forEach(player => {
+        let info = player.querySelector(".player-info");
+
+        if (player === selectedPlayer) {
+            player.style.display = "block";
+            info.style.display = "block";
+        } else {
+            player.style.display = "none";
+        }
+    });
+
+    // show back button
+    document.getElementById("backBtn").style.display = "block";
+}
+
+function showAllPlayers() {
+    let allPlayers = document.querySelectorAll(".player");
+
+    allPlayers.forEach(player => {
+        player.style.display = "block";
+        player.querySelector(".player-info").style.display = "none";
+    });
+
+    document.getElementById("backBtn").style.display = "none";
+}
+</script>
+
+<script>
+function openImage(src) {
+    window.open(src, "_blank");
+}
+</script>
+<script>
+function showImage(src) {
+    document.getElementById("popup").style.display = "flex";
+    document.getElementById("popup-img").src = src;
+}
+
+function closeImage() {
+    document.getElementById("popup").style.display = "none";
+}
+</script>
+</body>
+</html>
