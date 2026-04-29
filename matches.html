@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Matches - Dinamo U18</title>
+
+<style>
+body {
+    background: #0b1d3a;
+    color: white;
+    font-family: Arial;
+    margin: 0;
+}
+
+h1 {
+    text-align: center;
+    padding: 20px;
+}
+
+#matches {
+    padding: 20px;
+}
+
+.match {
+    background: linear-gradient(135deg, #122a52, #163a6b);
+    margin: 15px auto;
+    width: 80%;
+    border-radius: 15px;
+    padding: 20px;
+    transition: 0.3s;
+}
+
+.match:hover {
+    transform: scale(1.02);
+}
+
+.teams {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.score {
+    font-size: 32px;
+    margin: 10px 0;
+}
+
+.win { color: #00ff88; }
+.loss { color: #ff4d4d; }
+.draw { color: orange; }
+
+.date {
+    opacity: 0.8;
+}
+
+.details {
+    margin-top: 10px;
+    font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Matches</h1>
+
+<div id="matches"></div>
+
+<script>
+function toggleMatch(selectedMatch) {
+    let allMatches = document.querySelectorAll(".match");
+
+    allMatches.forEach(match => {
+        let details = match.querySelector(".details");
+
+        if (match === selectedMatch) {
+            match.style.display = "block";
+            details.style.display = "block";
+        } else {
+            match.style.display = "none";
+        }
+    });
+
+    document.getElementById("backBtn").style.display = "block";
+}
+
+function showAllMatches() {
+    let allMatches = document.querySelectorAll(".match");
+
+    allMatches.forEach(match => {
+        match.style.display = "block";
+        match.querySelector(".details").style.display = "none";
+    });
+
+    document.getElementById("backBtn").style.display = "none";
+}
+</script>
+  <script>
+fetch("PASTE_YOUR_CSV_LINK_HERE")
+.then(res => res.text())
+.then(data => {
+    let rows = data.split("\n").slice(1);
+
+    let container = document.getElementById("matches");
+
+    rows.forEach(row => {
+        let cols = row.split(",");
+
+        let match = document.createElement("div");
+        match.className = "match";
+
+        match.innerHTML = `
+            <div class="teams">${cols[0]}</div>
+            <div class="score ${cols[3]}">${cols[1]}</div>
+            <div class="date">${cols[2]}</div>
+
+            <div class="details">
+                <p><strong>Goals:</strong> ${cols[4]}</p>
+                <p><strong>Assists:</strong> ${cols[5]}</p>
+                <p><strong>Possession:</strong> ${cols[6]}</p>
+                <p><strong>Shots:</strong> ${cols[7]}</p>
+            </div>
+        `;
+
+        container.appendChild(match);
+    });
+});
+</script>
+
+</body>
+</html>
