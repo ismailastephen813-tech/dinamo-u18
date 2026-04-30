@@ -1,3 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dinamo U18 - Players</title>
+
+    <style>
+        body {
+            background: #0b1d3a;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* PLAYER CARD */
+        .player {
+            background: #122a52;
+            margin: 12px auto;
+            width: 92%;
+            max-width: 650px;
+            border-radius: 12px;
+            padding: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .player:hover {
+            background: #163a6b;
+        }
+
+        /* HEADER */
+        .player-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .player-header img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* INFO SECTION */
+        .player-info {
+            display: none;
+            margin-top: 12px;
+        }
+
+        /* FIX BIG IMAGES */
+        .player-info img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            max-height: 220px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .player-info a {
+            color: #ff4d4d;
+            text-decoration: none;
+        }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            .player {
+                width: 95%;
+                padding: 12px;
+            }
+
+            .player-header img {
+                width: 50px;
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
 <h1>Our Players</h1>
 
 <div id="players"></div>
@@ -8,6 +95,7 @@ const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTvpkXU7-63UCW
 fetch(sheetURL)
 .then(res => res.text())
 .then(data => {
+
     const rows = data.trim().split("\n").slice(1);
     const container = document.getElementById("players");
 
@@ -45,7 +133,7 @@ fetch(sheetURL)
                 <p><b>Stats:</b> ${player.goals} Goals | ${player.assists} Assists</p>
 
                 <p>
-                    <b>Instagram:</b> 
+                    <b>Instagram:</b>
                     <a href="${player.instagram}" target="_blank">Open</a>
                 </p>
             </div>
@@ -59,3 +147,6 @@ function toggle(el) {
     info.style.display = info.style.display === "block" ? "none" : "block";
 }
 </script>
+
+</body>
+</html>
