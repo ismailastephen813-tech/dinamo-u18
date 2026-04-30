@@ -3,7 +3,6 @@
 <head>
     <title>Dinamo U18</title>
 
-    <!-- Mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
@@ -14,18 +13,16 @@
             color: white;
         }
 
-        /* HEADER */
         header {
             text-align: center;
-            padding: 20px;
+            padding: 15px;
             background: #08142b;
         }
 
         header img {
-            width: 100px;
+            width: 80px;
         }
 
-        /* NAVBAR */
         nav {
             background: #122a52;
             display: flex;
@@ -45,99 +42,67 @@
             color: red;
         }
 
-        /* HERO */
-        .hero {
-            text-align: center;
-            padding: 50px 20px;
-        }
-
-        .hero h2 {
-            font-size: 2rem;
-        }
-
-        .btn {
-            background: red;
-            padding: 12px 25px;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            display: inline-block;
-            margin-top: 15px;
-        }
-
-        .btn:hover {
-            background: darkred;
-        }
-
-        /* NEWS */
-        .news {
+        /* GRID LAYOUT */
+        .main {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
             padding: 20px;
         }
 
-        .news h2 {
-            text-align: center;
+        /* CARDS */
+        .card {
+            background: #122a52;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
             margin-bottom: 20px;
         }
 
-        .news-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
+        .card h3 {
+            margin-bottom: 10px;
         }
 
-        .news-card {
-            background: #122a52;
-            border-radius: 10px;
-            overflow: hidden;
-            width: 300px;
-            transition: 0.3s;
-        }
-
-        .news-card img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-
-        .news-card h3 {
-            margin: 10px;
-        }
-
-        .news-card p {
-            margin: 10px;
+        .card p {
+            color: #ccc;
             font-size: 0.9rem;
         }
 
-        .news-card:hover {
-            transform: translateY(-8px);
+        /* MATCH */
+        .match {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .team {
+            text-align: center;
+        }
+
+        .team img {
+            width: 40px;
+        }
+
+        /* TABLE */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        td {
+            padding: 6px;
+            border-bottom: 1px solid #1f3b6d;
+        }
+
+        table tr:hover {
+            background: rgba(255,255,255,0.05);
         }
 
         /* MOBILE */
-        @media (max-width: 600px) {
-            header img {
-                width: 80px;
-            }
-
-            h1 {
-                font-size: 1.5rem;
-            }
-
-            .hero {
-                padding: 30px 15px;
-            }
-
-            .hero h2 {
-                font-size: 1.3rem;
-            }
-
-            nav {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .news-card {
-                width: 90%;
+        @media (max-width: 900px) {
+            .main {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -146,9 +111,8 @@
 <body>
 
 <header>
-    <img src="logo.png" alt="Dinamo Logo">
+    <img src="logo.png">
     <h1>Dinamo U18</h1>
-    <p>London Dinamo Football Club</p>
 </header>
 
 <nav>
@@ -158,35 +122,99 @@
     <a href="gallery.html">Gallery</a>
 </nav>
 
-<div class="hero">
-    <h2>Welcome to Dinamo U18</h2>
-    <p>Passion. Discipline. Football.</p>
-    <a href="matches.html" class="btn">View Matches</a>
+<div class="main">
+
+    <!-- LEFT SIDE -->
+    <div>
+
+        <div class="card">
+            <h3>Next Match</h3>
+
+            <div class="match">
+                <div class="team">
+                    <img src="team1.jpg">
+                    <p>Dinamo</p>
+                </div>
+
+                <div>
+                    <h2>15:00</h2>
+                    <p>May 5</p>
+                </div>
+
+                <div class="team">
+                    <img src="team2.jpg">
+                    <p>Opponent</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Latest News</h3>
+            <p>Dinamo U18 is ready for the new season. All stats reset.</p>
+        </div>
+
+        <!-- ✅ LIVE TABLE -->
+        <div class="card">
+            <h3>League Table</h3>
+
+            <table id="leagueTable">
+                <tr>
+                    <td>#</td>
+                    <td>Team</td>
+                    <td>Pts</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div>
+
+        <div class="card">
+            <h3>Top Players</h3>
+            <p>#7 - 0 Goals</p>
+            <p>#10 - 0 Goals</p>
+            <p>#9 - 0 Goals</p>
+        </div>
+
+        <div class="card">
+            <h3>Upcoming Matches</h3>
+            <p>May 5 - vs London FC</p>
+            <p>May 10 - vs City</p>
+        </div>
+
+    </div>
+
 </div>
 
-<section class="news">
-    <h2>Latest News</h2>
+<!-- ✅ GOOGLE SHEETS CONNECTION -->
+<script>
+const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTFeoqVHunR8pNuVcI6wASqFZNm89fugM-u47HKmJomKz6Ey7KKV12CI9gZch70yVu9NMgI3LeLXHEk/pub?output=csv";
 
-    <div class="news-container">
-        <div class="news-card">
-            <img src="match1.jpg">
-            <h3>Dinamo Wins 3-1</h3>
-            <p>Strong performance from the squad in yesterday’s match.</p>
-        </div>
+fetch(sheetURL)
+    .then(response => response.text())
+    .then(data => {
+        const rows = data.trim().split("\n").slice(1);
+        const table = document.getElementById("leagueTable");
 
-        <div class="news-card">
-            <img src="training.jpg">
-            <h3>Training Update</h3>
-            <p>Team preparing hard for upcoming fixtures.</p>
-        </div>
+        rows.forEach(row => {
+            const cols = row.split(",");
+            if (cols.length < 3) return;
 
-        <div class="news-card">
-            <img src="player.jpg">
-            <h3>Player Spotlight</h3>
-            <p>Midfield dominating performances this week.</p>
-        </div>
-    </div>
-</section>
+            const tr = document.createElement("tr");
+
+            tr.innerHTML = `
+                <td>${cols[0]}</td>
+                <td>${cols[1]}</td>
+                <td>${cols[2]}</td>
+            `;
+
+            table.appendChild(tr);
+        });
+    })
+    .catch(err => console.error("Sheet error:", err));
+</script>
 
 </body>
 </html>
