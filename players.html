@@ -1,493 +1,61 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Players - Dinamo U18</title>
-
-    <style>
-        body {
-            background: #0b1d3a;
-            color: white;
-            font-family: Arial;
-            margin: 0;
-        }
-
-        h1 {
-            text-align: center;
-            padding: 20px;
-        }
-
-        .player {
-            background: #122a52;
-            margin: 15px auto;
-            width: 80%;
-            border-radius: 12px;
-            padding: 15px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .player:hover {
-            background: #163a6b;
-        }
-
-        .player-header {
-            display: flex;
-            align-items: center;
-        }
-
-        .player-header img {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            margin-right: 15px;
-            object-fit: cover;
-        }
-
-        .player-info {
-            display: none;
-            margin-top: 15px;
-            padding-left: 85px;
-            animation: fadeIn 0.3s ease-in-out;
-        }
-
-        .player-info p {
-            margin: 5px 0;
-        }
-
-        .player-info a {
-            color: #ff4d4d;
-            text-decoration: none;
-        }
-
-        .player-info img {
-            width: 100%;
-            max-height: 220px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-top: 10px;
-        }
-        #backBtn {
-    background: red;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-#backBtn:hover {
-    background: darkred;
-}
-
-        @keyframes fadeIn {
-            from {opacity: 0;}
-            to {opacity: 1;}
-        }
-        .gallery {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-    overflow-x: auto;
-}
-
-.gallery img {
-    width: 150px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 8px;
-}
-#popup {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.9);
-    justify-content: center;
-    align-items: center;
-}
-
-#popup img {
-    max-width: 90%;
-    max-height: 90%;
-    border-radius: 10px;
-}
-    </style>
-</head>
-
-<body>
-
 <h1>Our Players</h1>
-<button id="backBtn" onclick="showAllPlayers()" style="display:none; margin:20px;">
-    ← Back to Players
-</button>
 
-<!-- brax -->
-<div class="player" onclick="toggleInfo(this)">
-    <div class="player-header">
-        <img src="player8.jpg">
-        <h3>Brax Stewart</h3>
-    </div>
-
-    <div class="player-info">
-        <p><strong>position:</strong>CM</p>
-        <p><strong>Age:</strong> 16</p>
-        <p><strong>Preferred Foot:</strong> Right</p>
-        <p><strong>Country:</strong>Swiss/England</p>
-        <p><strong>Height:</strong> 183cm</p>
-        <p><strong>Number:</strong> 8</p>
-
-        <p><strong>Stats:</strong> 0 Goals | 0 Assists</p>
-
-        <p><strong>Social:</strong></p>
-    <div class="socials">
-        <a href="https://instagram.com/@sbrax8" target="_blank">📸</a>
-    </div>
-
-    <div class="gallery">
-        <img src="brax1.jpg" onclick="openImage(this.src)">
-        <img src="brax2.jpg" onclick="openImage(this.src)">
-        <img src="brax3.jpg" onclick="openImage(this.src)">
-    </div>
-    </div>
-</div>
-
-<!-- PLAYER 2 -->
-<div class="player" onclick="toggleInfo(this)">
-    <div class="player-header">
-        <img src="player96.jpg">
-        <h3>Aiden Mills</h3>
-    </div>
-
-    <div class="player-info">
-        <p><strong>Position:</strong>GK</p>
-        <p><strong>Age:</strong> 18</p>
-        <p><strong>Preferred Foot:</strong> Left</p>
-        <p><strong>Country:</strong> Canada</p>
-        <p><strong>Height:</strong> 180 cm</p>
-        <p><strong>Number:</strong> 96</p>
-
-        <p><strong>Stats:</strong> 1 Goal | 0 Assists</p>
-
-        <p><strong>Social:</strong>
-            <a href="#" target="_blank">Instagram</a>
-        </p>
-
-        <img src="game2.jpg">
-    </div>
-</div>
-<!-- gianluca -->
-<div class="player" onclick="toggleInfo(this)">
-    <div class="player-header">
-        <img src="player75.jpg">
-        <h3>Gianluca Gentile</h3>
-    </div>
-
-    <div class="player-info">
-        <p><strong>position:</strong>ST</p>
-        <p><strong>Age:</strong> 18</p>
-        <p><strong>Preferred Foot:</strong> Right</p>
-        <p><strong>Country:</strong>Canada/Italy/Malta</p>
-        <p><strong>Height:</strong> 180 cm</p>
-        <p><strong>Number:</strong> 75</p>
-
-        <p><strong>Stats:</strong> 0 Goals | 0 Assists</p>
-
-        <p><strong>Social:</strong></p>
-    <div class="socials">
-         <a href="https://instagram.com/g.gentile_75" target="_blank">📸</a>
-    </div>
-
-      <div class="gallery">
-        <img src="gianluca1.jpg" onclick="openImage(this.src)">
-        <img src="gianluca2.jpg" onclick="openImage(this.src)">
-        <img src="gianluca3.jpg" onclick="openImage(this.src)">
-    </div>
-    </div>
-</div>
-
-
-<!-- anthony  -->
-<div class="player" onclick="toggleInfo(this)">
-    <div class="player-header">
-        <img src="player25.jpg">
-        <h3>Anthony Fletcher</h3>
-    </div>
-
-    <div class="player-info">
-        <p><strong>position:</strong>CB/CDM</p>
-        <p><strong>Age:</strong> 18</p>
-        <p><strong>Preferred Foot:</strong> left</p>
-        <p><strong>Country:</strong>Canada/Jamaica</p>
-        <p><strong>Height:</strong> 176 cm</p>
-        <p><strong>Number:</strong> 25</p>
-        <p><strong>Stats:</strong> 0 Goals | 0 Assists</p>
-
-        <p><strong>Social:</strong></p>
-    <div class="socials">
-         <a href="https://instagram.com/afletcher051" target="_blank">📸</a>
-    </div>
-
-        <div class="gallery">
-        <img src="anthony1.jpg" onclick="openImage(this.src)">
-        <img src="anthony2.jpg" onclick="openImage(this.src)">
-        <img src="anthony3.jpg" onclick="openImage(this.src)">
-    </div>
-    </div>
-</div>
-
-    <!--chase  -->
-<div class="player" onclick="toggleInfo(this)">
-    <div class="player-header">
-        <img src="chase1.jpg">
-        <h3>Chase Clipperton</h3>
-    </div>
-
-    <div class="player-info">
-        <p><strong>position:</strong>ST</p>
-        <p><strong>Age:</strong> 17</p>
-        <p><strong>Preferred Foot:</strong> left</p>
-        <p><strong>Country:</strong>Canada</p>
-        <p><strong>Height:</strong> 182 cm</p>
-        <p><strong>Number:</strong> 79</p>
-        <p><strong>Stats:</strong> 0 Goals | 0 Assists</p>
-
-        <p><strong>Social:</strong></p>
-    <div class="socials">
-         <a href="https://instagram.com/Chase_clipp" target="_blank">Instagram📸</a>
-    </div>
-
-        <div class="gallery">
-        <img src="chase2.jpg" onclick="openImage(this.src)">
-        <img src="chase1.jpg" onclick="openImage(this.src)">
-        <img src="chase3.jpg" onclick="openImage(this.src)">
-    </div>
-    </div>
-</div>
-
-    <!-- kaine -->
-<div class="player" onclick="toggleInfo(this)">
-    <div class="player-header">
-        <img src="kaine1.jpg">
-        <h3>Kaine Smaldon</h3>
-    </div>
-
-    <div class="player-info">
-        <p><strong>position:</strong>LW</p>
-        <p><strong>Age:</strong> 18 </p>
-        <p><strong>Preferred Foot:</strong>Right</p>
-        <p><strong>Country:</strong>Canada</p>
-        <p><strong>Height:</strong> 184cm</p>
-        <p><strong>Number:</strong> 17</p>
-        <p><strong>Stats:</strong> 0 Goals | 0 Assists</p>
-
-        <p><strong>Social:</strong></p>
-    <div class="socials">
-         <a href="https://instagram.com/kaine1.7" target="_blank">Instagram📸</a>
-    </div>
-        <div class="gallery">
-        <img src="kaine1.jpg" onclick="openImage(this.src)">
-        <img src="kaine2.jpg" onclick="openImage(this.src)">
-        <img src="kaine3.jpg" onclick="openImage(this.src)">
-    </div>
-    </div>
-</div>
-      <!-----chips chips----->
-    
-    <div class="player" onclick="toggleInfo(this)">
-    <div class="player-header">
-        <img src="chips3.jpg">
-        <h3> Aldris Aleman </h3>
-    </div>
-    <div class="player-info">
-        <p><strong>position:</strong>LW/CM/LB</p>
-        <p><strong>Age:</strong> 16 </p>
-        <p><strong>Preferred Foot:</strong>Left</p>
-        <p><strong>Country:</strong>Mexico/Honduras</p>
-        <p><strong>Height:</strong> 176cm</p>
-        <p><strong>Number:</strong> 21</p>
-        <p><strong>Stats:</strong> 0 Goals | 0 Assists</p>
-
-        <p><strong>Social:</strong></p>
-    <div class="socials">
-         <a href="https://instagram.com/aleman_ald" target="_blank">Instagram📸</a>
-    </div>
-
-       <div class="gallery">
-        <img src="chips1.jpg" onclick="openImage(this.src)">
-        <img src="chips2.jpg" onclick="openImage(this.src)">
-        <img src="chips3.jpg" onclick="openImage(this.src)">
-    </div>
-    </div>
-</div>
-
-      <!---- nics--->
-    
-    <div class="player" onclick="toggleInfo(this)">
-    <div class="player-header">
-        <img src="nics1.jpg">
-        <h3>Nicolas Subotic</h3>
-    </div>
-    <div class="player-info">
-        <p><strong>role:</strong>Captain</p>
-        <p><strong>position:</strong>CDM/CB</p>
-        <p><strong>Age:</strong> 16 </p>
-        <p><strong>Preferred Foot:</strong>Right</p>
-        <p><strong>Country:</strong>Canada</p>
-        <p><strong>Height:</strong> 167cm</p>
-        <p><strong>Number:</strong> 13</p>
-        <p><strong>Stats:</strong> 0 Goals | 0 Assists</p>
-
-        <p><strong>Social:</strong></p>
-    <div class="socials">
-         <a href="https://instagram.com/nicthethicc13" target="_blank">Instagram📸</a>
-    </div>
-
-        <div class="gallery">
-        <img src="nics3.jpg" onclick="openImage(this.src)">
-        <img src="nics2.jpg" onclick="openImage(this.src)">
-        <img src="nics1.jpg" onclick="openImage(this.src)">
-    </div>
-    </div>
-</div>
-
-      <!---- owen--->
-    
-    <div class="player" onclick="toggleInfo(this)">
-    <div class="player-header">
-        <img src="owen1.jpg">
-        <h3>Owen Hambley</h3>
-    </div>
-    <div class="player-info">
-        <p><strong>position:</strong>CB</p>
-        <p><strong>Age:</strong> 17 </p>
-        <p><strong>Preferred Foot:</strong>Both</p>
-        <p><strong>Country:</strong>Canada</p>
-        <p><strong>Height:</strong> 176cm</p>
-        <p><strong>Number:</strong> 12</p>
-        <p><strong>Stats:</strong> 0 Goals | 0 Assists</p>
-
-        <p><strong>Social:</strong></p>
-    <div class="socials">
-         <a href="https://instagram.com/owen.7557" target="_blank">Instagram📸</a>
-    </div>
-
-        <div class="gallery">
-        <img src="owen1.jpg" onclick="openImage(this.src)">
-        <img src="owen2.jpg" onclick="openImage(this.src)">
-        <img src="owen3.jpg" onclick="openImage(this.src)">
-    </div>
-    </div>
-</div>
-
-      <!---- idris--->
-    
-    <div class="player" onclick="toggleInfo(this)">
-    <div class="player-header">
-        <img src="idris1.jpg">
-        <h3>Idris</h3>
-    </div>
-    <div class="player-info">
-        <p><strong>position:</strong>RB/CB</p>
-        <p><strong>Age:</strong> 16 </p>
-        <p><strong>Preferred Foot:</strong>Right</p>
-        <p><strong>Country:</strong>Tria</p>
-        <p><strong>Height:</strong> 176cm</p>
-        <p><strong>Number:</strong> 4</p>
-        <p><strong>Stats:</strong> 0 Goals | 0 Assists</p>
-
-        <p><strong>Social:</strong></p>
-    <div class="socials">
-         <a href="https://instagram.com/idrisdagoat" target="_blank">Instagram📸</a>
-    </div>
-
-        <div class="gallery">
-        <img src="idris3.jpg" onclick="openImage(this.src)">
-        <img src="idris2.jpg" onclick="openImage(this.src)">
-        <img src="idris1.jpg" onclick="openImage(this.src)">
-    </div>
-    </div>
-</div>
-
-      <!---- fernando--->
-    
-    <div class="player" onclick="toggleInfo(this)">
-    <div class="player-header">
-        <img src="fernando2.jpg">
-        <h3>Stephen Ismaila</h3>
-    </div>
-    <div class="player-info">
-        <p><strong>position:</strong>LB/RB/WRB/WLB/CB/LW</p>
-        <p><strong>Age:</strong> 18 </p>
-        <p><strong>Preferred Foot:</strong>Left</p>
-        <p><strong>Country:</strong></p>
-        <p><strong>Height:</strong> 182cm</p>
-        <p><strong>Number:</strong> 19</p>
-        <p><strong>Stats:</strong> 0 Goals | 0 Assists</p>
-
-        <p><strong>Social:</strong></p>
-    <div class="socials">
-         <a href="https://instagram.com/fernando.0919" target="_blank">Instagram📸</a>
-    </div>
-
-        <div class="gallery">
-        <img src="fernando3.jpg" onclick="openImage(this.src)">
-        <img src="fernando2.jpg" onclick="openImage(this.src)">
-        <img src="fernando1.jpg" onclick="openImage(this.src)">
-    </div>
-    </div>
-</div>
-
-    
-
-
+<div id="players"></div>
 
 <script>
-function toggleInfo(selectedPlayer) {
-    let allPlayers = document.querySelectorAll(".player");
+const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTvpkXU7-63UCW1jIiSryVxfXUPpFUHqkKgvkk2e30JVJzaWrzve2zFWDBZXuokG9SA_YCUzusUvbhU/pub?output=csv";
 
-    allPlayers.forEach(player => {
-        let info = player.querySelector(".player-info");
+fetch(sheetURL)
+.then(res => res.text())
+.then(data => {
+    const rows = data.trim().split("\n").slice(1);
+    const container = document.getElementById("players");
 
-        if (player === selectedPlayer) {
-            player.style.display = "block";
-            info.style.display = "block";
-        } else {
-            player.style.display = "none";
-        }
+    rows.forEach(row => {
+        const cols = row.split(",");
+
+        const player = {
+            name: cols[0],
+            position: cols[1],
+            age: cols[2],
+            foot: cols[3],
+            country: cols[4],
+            height: cols[5],
+            number: cols[6],
+            goals: cols[7],
+            assists: cols[8],
+            instagram: cols[9],
+            image: cols[10]
+        };
+
+        container.innerHTML += `
+        <div class="player" onclick="toggle(this)">
+            <div class="player-header">
+                <img src="${player.image}">
+                <h3>${player.name}</h3>
+            </div>
+
+            <div class="player-info">
+                <p><b>Position:</b> ${player.position}</p>
+                <p><b>Age:</b> ${player.age}</p>
+                <p><b>Foot:</b> ${player.foot}</p>
+                <p><b>Country:</b> ${player.country}</p>
+                <p><b>Height:</b> ${player.height}</p>
+                <p><b>Number:</b> ${player.number}</p>
+                <p><b>Stats:</b> ${player.goals} Goals | ${player.assists} Assists</p>
+
+                <p>
+                    <b>Instagram:</b> 
+                    <a href="${player.instagram}" target="_blank">Open</a>
+                </p>
+            </div>
+        </div>
+        `;
     });
+});
 
-    // show back button
-    document.getElementById("backBtn").style.display = "block";
-}
-
-function showAllPlayers() {
-    let allPlayers = document.querySelectorAll(".player");
-
-    allPlayers.forEach(player => {
-        player.style.display = "block";
-        player.querySelector(".player-info").style.display = "none";
-    });
-
-    document.getElementById("backBtn").style.display = "none";
+function toggle(el) {
+    let info = el.querySelector(".player-info");
+    info.style.display = info.style.display === "block" ? "none" : "block";
 }
 </script>
-
-<script>
-function openImage(src) {
-    window.open(src, "_blank");
-}
-</script>
-<script>
-function showImage(src) {
-    document.getElementById("popup").style.display = "flex";
-    document.getElementById("popup-img").src = src;
-}
-
-function closeImage() {
-    document.getElementById("popup").style.display = "none";
-}
-</script>
-</body>
-</html>
