@@ -3,6 +3,9 @@
 <head>
     <title>Gallery - Dinamo U18</title>
 
+    <!-- Mobile responsiveness -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
         body {
             background: #0b1d3a;
@@ -19,12 +22,14 @@
         nav {
             background: #122a52;
             padding: 10px;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         nav a {
             color: white;
-            margin: 15px;
+            margin: 10px;
             text-decoration: none;
             font-weight: bold;
         }
@@ -33,6 +38,7 @@
             color: red;
         }
 
+        /* Gallery Grid */
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -46,14 +52,14 @@
             object-fit: cover;
             border-radius: 10px;
             cursor: pointer;
-            transition: 0.3s;
+            transition: transform 0.3s;
         }
 
         .gallery img:hover {
             transform: scale(1.05);
         }
 
-        /* POPUP */
+        /* Popup */
         #popup {
             display: none;
             position: fixed;
@@ -71,19 +77,51 @@
             max-height: 90%;
             border-radius: 10px;
         }
+
+        /* Controls */
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            font-size: 40px;
+            cursor: pointer;
+            padding: 10px;
+            user-select: none;
+        }
+
+        .left { left: 20px; }
+        .right { right: 20px; }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+            .gallery img {
+                height: 140px;
+            }
+
+            .arrow {
+                font-size: 30px;
+            }
+
+            .close {
+                font-size: 25px;
+            }
+        }
     </style>
 </head>
 
 <body>
 
 <nav>
-
     <a href="index.html">Home</a>
     <a href="players.html">Players</a>
     <a href="gallery.html">Gallery</a>
-
-
-   
 </nav>
 
 <h1>Team Gallery</h1>
@@ -91,21 +129,14 @@
 <div class="gallery">
     <img src="team1.jpg" onclick="showImage(0)">
     <img src="team2.jpg" onclick="showImage(1)">
-    <img src="team3.jpg" onclick="showImage(3)">
-    <img src="team4.jpg" onclick="showImage(4)">
-    <img src="team5.jpg" onclick="showImage(5)">
-    <img src="team6.jpg" onclick="showImage(6)">
-    <img src="team7.jpg" onclick="showImage(7)">
-    <img src="team8.jpg" onclick="showImage(8)">
-    <img src="team9.jpg" onclick="showImage(9)">
-    <img src="team10.jpg" onclick="showImage(10)">
-    <img src="team11.jpg" onclick="showImage(11)">
-    <img src="team12.jpg" onclick="showImage(12)">
-    <img src="team13.jpg" onclick="showImage(13)">
-    <img src="team14.jpg" onclick="showImage(14)">
-    <img src="team15.jpg" onclick="showImage(15)">
-    <img src="team16.jpg" onclick="showImage(16)">
-    <img src="team17.jpg" onclick="showImage(17)">
+    <img src="team3.jpg" onclick="showImage(2)">
+    <img src="team4.jpg" onclick="showImage(3)">
+    <img src="team5.jpg" onclick="showImage(4)">
+    <img src="team6.jpg" onclick="showImage(5)">
+    <img src="team7.jpg" onclick="showImage(6)">
+    <img src="team8.jpg" onclick="showImage(7)">
+    <img src="team9.jpg" onclick="showImage(8)">
+    <img src="team10.jpg" onclick="showImage(9)">
 </div>
 
 <div id="popup">
@@ -118,23 +149,6 @@
 </div>
 
 <script>
-function showImage(src) {
-    document.getElementById("popup").style.display = "flex";
-    document.getElementById("popup-img").src = src;
-}
-
-function closeImage() {
-    document.getElementById("popup").style.display = "none";
-}
-</script>
-
-<script>
-function goBack() {
-    window.history.back();
-}
-</script>
-
-<script>
 let images = [
     "team1.jpg",
     "team2.jpg",
@@ -144,15 +158,8 @@ let images = [
     "team6.jpg",
     "team7.jpg",
     "team8.jpg",
-    "team10.jpg",
-    "team11.jpg",
-    "team12.jpg",
-    "team13.jpg",
-    "team14.jpg",
-    "team15.jpg",
-    "team16.jpg",
-    "team17.jpg"
-    
+    "team9.jpg",
+    "team10.jpg"
 ];
 
 let currentIndex = 0;
@@ -176,6 +183,20 @@ function prevImage() {
     currentIndex = (currentIndex - 1 + images.length) % images.length;
     document.getElementById("popup-img").src = images[currentIndex];
 }
+
+/* Swipe support (mobile) */
+let startX = 0;
+
+document.getElementById("popup").addEventListener("touchstart", e => {
+    startX = e.touches[0].clientX;
+});
+
+document.getElementById("popup").addEventListener("touchend", e => {
+    let endX = e.changedTouches[0].clientX;
+
+    if (startX - endX > 50) nextImage();
+    if (endX - startX > 50) prevImage();
+});
 </script>
 
 </body>
