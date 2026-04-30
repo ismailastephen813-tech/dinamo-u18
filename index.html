@@ -2,6 +2,10 @@
 <html>
 <head>
     <title>Dinamo U18</title>
+
+    <!-- Mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
         body {
             margin: 0;
@@ -10,6 +14,7 @@
             color: white;
         }
 
+        /* HEADER */
         header {
             text-align: center;
             padding: 20px;
@@ -17,18 +22,21 @@
         }
 
         header img {
-            width: 120px;
+            width: 100px;
         }
 
+        /* NAVBAR */
         nav {
             background: #122a52;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
             padding: 10px;
         }
 
         nav a {
             color: white;
-            margin: 15px;
+            margin: 10px;
             text-decoration: none;
             font-weight: bold;
         }
@@ -37,62 +45,101 @@
             color: red;
         }
 
+        /* HERO */
         .hero {
             text-align: center;
-            padding: 40px;
+            padding: 50px 20px;
+        }
+
+        .hero h2 {
+            font-size: 2rem;
         }
 
         .btn {
             background: red;
-            padding: 10px 20px;
+            padding: 12px 25px;
             color: white;
             text-decoration: none;
             border-radius: 5px;
+            display: inline-block;
+            margin-top: 15px;
         }
 
-        section {
+        .btn:hover {
+            background: darkred;
+        }
+
+        /* NEWS */
+        .news {
             padding: 20px;
         }
-        .news {
-    padding: 20px;
-}
 
-.news-container {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
+        .news h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-.news-card {
-    background: #122a52;
-    border-radius: 10px;
-    overflow: hidden;
-    width: 300px;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
+        .news-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
 
-.news-card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-}
+        .news-card {
+            background: #122a52;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 300px;
+            transition: 0.3s;
+        }
 
-.news-card h3 {
-    margin: 10px;
-}
+        .news-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
 
-.news-card p {
-    margin: 10px;
-    font-size: 0.9rem;
-}
+        .news-card h3 {
+            margin: 10px;
+        }
 
-/* Hover animation */
-.news-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-}
-        
+        .news-card p {
+            margin: 10px;
+            font-size: 0.9rem;
+        }
+
+        .news-card:hover {
+            transform: translateY(-8px);
+        }
+
+        /* MOBILE */
+        @media (max-width: 600px) {
+            header img {
+                width: 80px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero {
+                padding: 30px 15px;
+            }
+
+            .hero h2 {
+                font-size: 1.3rem;
+            }
+
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .news-card {
+                width: 90%;
+            }
+        }
     </style>
 </head>
 
@@ -105,7 +152,7 @@
 </header>
 
 <nav>
-    <a href="#">Home</a>
+    <a href="index.html">Home</a>
     <a href="players.html">Players</a>
     <a href="matches.html">Matches</a>
     <a href="gallery.html">Gallery</a>
@@ -114,12 +161,31 @@
 <div class="hero">
     <h2>Welcome to Dinamo U18</h2>
     <p>Passion. Discipline. Football.</p>
-    <a href="#" class="btn">View Matches</a>
+    <a href="matches.html" class="btn">View Matches</a>
 </div>
 
-<section>
+<section class="news">
     <h2>Latest News</h2>
-    <p>We won our last match 3-1. Great performance from the squad.</p>
+
+    <div class="news-container">
+        <div class="news-card">
+            <img src="match1.jpg">
+            <h3>Dinamo Wins 3-1</h3>
+            <p>Strong performance from the squad in yesterday’s match.</p>
+        </div>
+
+        <div class="news-card">
+            <img src="training.jpg">
+            <h3>Training Update</h3>
+            <p>Team preparing hard for upcoming fixtures.</p>
+        </div>
+
+        <div class="news-card">
+            <img src="player.jpg">
+            <h3>Player Spotlight</h3>
+            <p>Midfield dominating performances this week.</p>
+        </div>
+    </div>
 </section>
 
 </body>
