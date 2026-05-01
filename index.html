@@ -69,7 +69,6 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.85rem;
         }
 
         td {
@@ -77,14 +76,13 @@
             border-bottom: 1px solid #1f3b6d;
         }
 
-        /* 📱 MOBILE */
         @media (max-width: 900px) {
             .main {
                 grid-template-columns: 1fr;
             }
         }
 
-        /* 🔥 POPUP */
+        /* POPUP */
         #popup {
             display: none;
             position: fixed;
@@ -123,8 +121,6 @@
 <nav>
     <a href="index.html">Home</a>
     <a href="players.html">Players</a>
-    <a href="gallery.html">Gallery</a>
-    <a href="matches.html">Matches</a>
 </nav>
 
 <div class="main">
@@ -134,18 +130,15 @@
 
         <div class="card" onclick="showNextMatch()">
             <h3>Next Match</h3>
-
             <div class="match">
                 <div class="team">
                     <img src="logo.png">
                     <p>Dinamo</p>
                 </div>
-
                 <div>
                     <h2>18:30</h2>
                     <p>May 13</p>
                 </div>
-
                 <div class="team">
                     <img src="PCL.png">
                     <p>PCL Red</p>
@@ -160,7 +153,6 @@
 
         <div class="card" onclick="showTable()">
             <h3>League Table</h3>
-
             <table id="leagueTable">
                 <tr>
                     <td>#</td>
@@ -195,6 +187,11 @@
 </div>
 
 <script>
+// LINKS
+const scorersURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQTYItIowssHqL3ffEQrMk5Ahiodqd-qhx_iNvCYO3yhwYhL9lzuaNx0zZdNyWOVJa5KX7RZdWT_VPj/pub?output=csv";
+const assistsURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSZPjH0a6C4_GeOxwsrwX8yE1Z1DqXtCXGoqSYMDfbKncVzTfpkE20N_TAkZ9KtnABTLMbstIdqroIH/pub?output=csv";
+const tableURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTFeoqVHunR8pNuVcI6wASqFZNm89fugM-u47HKmJomKz6Ey7KKV12CI9gZch70yVu9NMgI3LeLXHEk/pub?output=csv";
+
 // POPUP
 function openPopup(content) {
     document.getElementById("popup").style.display = "flex";
@@ -205,19 +202,19 @@ function closePopup() {
     document.getElementById("popup").style.display = "none";
 }
 
-// NEXT MATCH
+// NEXT MATCH (STATIC FOR NOW)
 function showNextMatch() {
     openPopup(`
         <h2>Next Match</h2>
-        <p><b>Match:</b> Dinamo vs PCL Red</p>
-        <p><b>Date:</b> May 13</p>
-        <p><b>Time:</b> 18:30</p>
-        <p><b>Stadium:</b>N.London 1</p>
-        <p><b>Weather:</b> 18°C Cloudy</p>
+        <p><b>Dinamo vs PCL Red</b></p>
+        <p>Date: May 13</p>
+        <p>Time: 18:30</p>
+        <p>Stadium: London Sports Dome</p>
+        <p>Weather: 18°C Cloudy</p>
     `);
 }
 
-// TABLE POPUP
+// TABLE
 function showTable() {
     let rows = document.querySelectorAll("#leagueTable tr");
     let content = "<h2>League Table</h2><div class='table-wrapper'><table>";
@@ -227,36 +224,59 @@ function showTable() {
     });
 
     content += "</table></div>";
-
     openPopup(content);
 }
 
 // SCORERS
 function showScorers() {
-    let content = "<h2>Top Scorers</h2>";
+    fetch(scorersURL)
+    .then(res => res.text())
+    .then(data => {
+        let rows = data.trim().split("\n").slice(1);
 
-    for (let i = 1; i <= 16; i++) {
-        content += `<p>${i}. Player ${i} - ${Math.floor(Math.random()*10)} goals</p>`;
-    }
+        let players = rows.map(r => {
+            let c = r.split(",");
+            return { name: c[0], goals: parseInt(c[1]) || 0 };
+        });
 
-    openPopup(content);
+        players.sort((a,b) => b.goals - a.goals);
+
+        let content = "<h2>Top Scorers</h2>";
+
+        players.slice(0,16).forEach((p,i) => {
+            content += `<p>${i+1}. ${p.name} - ${p.goals} goals</p>`;
+        });
+
+        openPopup(content);
+    });
 }
 
 // ASSISTS
 function showAssists() {
-    let content = "<h2>Top Assists</h2>";
+    fetch(assistsURL)
+    .then(res => res.text())
+    .then(data => {
+        let rows = data.trim().split("\n").slice(1);
 
-    for (let i = 1; i <= 16; i++) {
-        content += `<p>${i}. Player ${i} - ${Math.floor(Math.random()*10)} assists</p>`;
-    }
+        let players = rows.map(r => {
+            let c = r.split(",");
+            return { name: c[0], assists: parseInt(c[1]) || 0 };
+        });
 
-    openPopup(content);
+        players.sort((a,b) => b.assists - a.assists);
+
+        let content = "<h2>Top Assists</h2>";
+
+        players.slice(0,16).forEach((p,i) => {
+            content += `<p>${i+1}. ${p.name} - ${p.assists} assists</p>`;
+        });
+
+        openPopup(content);
+    });
 }
 
-// SHEET TABLE
-const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTFeoqVHunR8pNuVcI6wASqFZNm89fugM-u47HKmJomKz6Ey7KKV12CI9gZch70yVu9NMgI3LeLXHEk/pub?output=csv";
-
-fetch(sheetURL)
+// LOAD TABLE
+fetch(tableURL)
 .then(res => res.text())
 .then(data => {
     const rows = data.trim().split("\n").slice(1);
@@ -264,13 +284,14 @@ fetch(sheetURL)
 
     rows.forEach(row => {
         const cols = row.split(",");
-
         const tr = document.createElement("tr");
+
         tr.innerHTML = `
             <td>${cols[0]}</td>
             <td>${cols[1]}</td>
             <td>${cols[2]}</td>
         `;
+
         table.appendChild(tr);
     });
 });
