@@ -2,7 +2,6 @@
 <html>
 <head>
     <title>Dinamo U18</title>
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
@@ -42,7 +41,6 @@
             color: red;
         }
 
-        /* GRID LAYOUT */
         .main {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -50,40 +48,24 @@
             padding: 20px;
         }
 
-        /* CARDS */
         .card {
             background: #122a52;
             border-radius: 15px;
             padding: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
             margin-bottom: 20px;
+            cursor: pointer;
         }
 
-        .card h3 {
-            margin-bottom: 10px;
-        }
-
-        .card p {
-            color: #ccc;
-            font-size: 0.9rem;
-        }
-
-        /* MATCH */
         .match {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .team {
-            text-align: center;
-        }
-
         .team img {
             width: 40px;
         }
 
-        /* TABLE */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -95,15 +77,38 @@
             border-bottom: 1px solid #1f3b6d;
         }
 
-        table tr:hover {
-            background: rgba(255,255,255,0.05);
-        }
-
-        /* MOBILE */
+        /* 📱 MOBILE */
         @media (max-width: 900px) {
             .main {
                 grid-template-columns: 1fr;
             }
+        }
+
+        /* 🔥 POPUP */
+        #popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        #popup-content {
+            background: #122a52;
+            width: 100%;
+            max-width: 700px;
+            border-radius: 20px 20px 0 0;
+            padding: 20px;
+            max-height: 85%;
+            overflow-y: auto;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
         }
     </style>
 </head>
@@ -118,22 +123,22 @@
 <nav>
     <a href="index.html">Home</a>
     <a href="players.html">Players</a>
-    <a href="matches.html">Matches</a>
     <a href="gallery.html">Gallery</a>
+    <a href="matches.html">Matches</a>
 </nav>
 
 <div class="main">
 
-    <!-- LEFT SIDE -->
+    <!-- LEFT -->
     <div>
 
-        <div class="card">
+        <div class="card" onclick="showNextMatch()">
             <h3>Next Match</h3>
 
             <div class="match">
                 <div class="team">
                     <img src="logo.png">
-                    <p>London Dinamo</p>
+                    <p>Dinamo</p>
                 </div>
 
                 <div>
@@ -150,13 +155,10 @@
 
         <div class="card">
             <h3>Latest News</h3>
-            <p>London Dinamo U18 is ready for the new season. After a Beautiful End to last Season, Winning the 
-                EMDSL 2025 Indoor District Cup
-                .</p>
+            <p>Dinamo U18 won the EMDSL 2025 Indoor District Cup.</p>
         </div>
 
-        <!-- ✅ LIVE TABLE -->
-        <div class="card">
+        <div class="card" onclick="showTable()">
             <h3>League Table</h3>
 
             <table id="leagueTable">
@@ -164,86 +166,114 @@
                     <td>#</td>
                     <td>Team</td>
                     <td>PL</td>
-                    <td>W</td>
-                    <td>D</td>
-                    <td>L</td>
-                    <td>+/-</td>
-                    <td>PTS</td>
-                    
                 </tr>
             </table>
         </div>
 
     </div>
 
-    <!-- RIGHT SIDE -->
+    <!-- RIGHT -->
     <div>
-        <div class="card">
-            <h3>Upcoming Matches</h3>
-            <p>May 13 - vs PCL Red</p>
-            <p>May 20 - vs WoodStock Fc</p>
-            <p>May 20 - vs Southend United Blue</p>
+
+        <div class="card" onclick="showScorers()">
+            <h3>Top Scorer</h3>
+            <p>Click to view top 16</p>
         </div>
 
-        <div class="card">
-            <h3>Top Scorer </h3>
-            <p># - 0 Goals</p>
-            <p># - 0 Goals</p>
-            <p># - 0 Goals</p>
+        <div class="card" onclick="showAssists()">
+            <h3>Assists</h3>
+            <p>Click to view top 16</p>
         </div>
 
-        <div class="card">
-            <h3>Assits</h3>
-            <p># - 0 Goals</p>
-            <p># - 0 Goals</p>
-            <p>#- 0 Goals</p>
-        </div>
-
-        <div class="card">
-            <h3>Yellow cards</h3>
-            <p>chase - 0 Goals</p>
-            <p>#10 - 0 Goals</p>
-            <p>#9 - 0 Goals</p>
-        </div>
-
-        <div class="card">
-            <h3>Red cards</h3>
-            <p>chase - 0 Goals</p>
-            <p>#10 - 0 Goals</p>
-            <p>#9 - 0 Goals</p>
-        </div>
-
-        
     </div>
 
 </div>
 
-<!-- ✅ GOOGLE SHEETS CONNECTION -->
+<!-- POPUP -->
+<div id="popup" onclick="closePopup()">
+    <div id="popup-content" onclick="event.stopPropagation()"></div>
+</div>
+
 <script>
+// POPUP
+function openPopup(content) {
+    document.getElementById("popup").style.display = "flex";
+    document.getElementById("popup-content").innerHTML = content;
+}
+
+function closePopup() {
+    document.getElementById("popup").style.display = "none";
+}
+
+// NEXT MATCH
+function showNextMatch() {
+    openPopup(`
+        <h2>Next Match</h2>
+        <p><b>Match:</b> Dinamo vs PCL Red</p>
+        <p><b>Date:</b> May 13</p>
+        <p><b>Time:</b> 18:30</p>
+        <p><b>Stadium:</b>N.London 1</p>
+        <p><b>Weather:</b> 18°C Cloudy</p>
+    `);
+}
+
+// TABLE POPUP
+function showTable() {
+    let rows = document.querySelectorAll("#leagueTable tr");
+    let content = "<h2>League Table</h2><div class='table-wrapper'><table>";
+
+    rows.forEach(r => {
+        content += "<tr>" + r.innerHTML + "</tr>";
+    });
+
+    content += "</table></div>";
+
+    openPopup(content);
+}
+
+// SCORERS
+function showScorers() {
+    let content = "<h2>Top Scorers</h2>";
+
+    for (let i = 1; i <= 16; i++) {
+        content += `<p>${i}. Player ${i} - ${Math.floor(Math.random()*10)} goals</p>`;
+    }
+
+    openPopup(content);
+}
+
+// ASSISTS
+function showAssists() {
+    let content = "<h2>Top Assists</h2>";
+
+    for (let i = 1; i <= 16; i++) {
+        content += `<p>${i}. Player ${i} - ${Math.floor(Math.random()*10)} assists</p>`;
+    }
+
+    openPopup(content);
+}
+
+// SHEET TABLE
 const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTFeoqVHunR8pNuVcI6wASqFZNm89fugM-u47HKmJomKz6Ey7KKV12CI9gZch70yVu9NMgI3LeLXHEk/pub?output=csv";
 
 fetch(sheetURL)
-    .then(response => response.text())
-    .then(data => {
-        const rows = data.trim().split("\n").slice(1);
-        const table = document.getElementById("leagueTable");
+.then(res => res.text())
+.then(data => {
+    const rows = data.trim().split("\n").slice(1);
+    const table = document.getElementById("leagueTable");
 
-        rows.forEach(row => {
-            const cols = row.split(",");
-            if (cols.length < 3) return;
+    rows.forEach(row => {
+        const cols = row.split(",");
 
-            const tr = document.createElement("tr");
-
-            tr.innerHTML = `
-                <td>${cols[0]}</td>
-                <td>${cols[1]}</td>
-                <td>${cols[2]}</td>
-            `;
-
-            table.appendChild(tr);
-        });
-    })
-    .catch(err => console.error("Sheet error:", err));
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td>${cols[0]}</td>
+            <td>${cols[1]}</td>
+            <td>${cols[2]}</td>
+        `;
+        table.appendChild(tr);
+    });
+});
 </script>
 
 </body>
